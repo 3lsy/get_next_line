@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:56:43 by echavez-          #+#    #+#             */
-/*   Updated: 2022/11/25 18:54:29 by echavez-         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:40:54 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 
 int	fill_buffer(char **buffer, int fd)
 {
-	char	buffy[BUFFER_SIZE + 1];
+	char	*buffy;
 	int		end;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, buffy, 0))
+	buffy = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffy || fd < 0 || BUFFER_SIZE < 1 || read(fd, buffy, 0))
+	{
+		free(buffy);
 		return (0);
+	}
 	if (*buffer == NULL)
 		*buffer = ft_strdup("");
-	while (ft_strchr(*buffer, '\n') == -1)
+	buffy[0] = 0;
+	while (ft_strchr(buffy, '\n') == -1)
 	{
 		end = read(fd, buffy, BUFFER_SIZE);
-		if (end == 0)
+		if (end <= 0)
 			break ;
-		if (end < 0)
-			return (0);
 		buffy[end] = 0;
 		*buffer = ft_strjoin(buffer, buffy);
 	}
+	free(buffy);
+	if (end < 0)
+		return (0);
 	return (1);
 }
 
@@ -43,6 +49,7 @@ char	*get_next_line(int fd)
 	if (!fill_buffer(&buffer, fd))
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	enter = ft_strchr(buffer, '\n');
@@ -56,6 +63,7 @@ char	*get_next_line(int fd)
 	if (buffer[0] == 0)
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	return (ft_fstrdup(&buffer, buffer));
