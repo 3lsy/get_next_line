@@ -6,11 +6,11 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:49:27 by echavez-          #+#    #+#             */
-/*   Updated: 2022/12/01 00:40:49 by echavez-         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:41:38 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 #include <fcntl.h>
 
