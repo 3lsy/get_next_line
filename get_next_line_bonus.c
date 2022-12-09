@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 00:03:01 by echavez-          #+#    #+#             */
-/*   Updated: 2022/12/01 01:00:49 by echavez-         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:15:11 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	fill_buffer(char **buffer, int fd)
 	int		end;
 
 	buffy = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffy || BUFFER_SIZE < 1 || read(fd, buffy, 0))
+	if (!buffy || BUFFER_SIZE < 1)
 	{
 		free(buffy);
 		return (0);
